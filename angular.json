@@ -9,16 +9,25 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/dk",
             "index": "apps/dk/src/index.html",
             "main": "apps/dk/src/main.ts",
             "polyfills": "apps/dk/src/polyfills.ts",
             "tsConfig": "apps/dk/tsconfig.app.json",
-            "assets": ["apps/dk/src/favicon.ico", "apps/dk/src/assets"],
-            "styles": ["apps/dk/src/styles.css"],
-            "scripts": []
+            "assets": [
+              "apps/dk/src/favicon.ico",
+              "apps/dk/src/assets"
+            ],
+            "styles": [
+              "apps/dk/src/styles.css"
+            ],
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/dk/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -74,12 +83,17 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/dk/src/**/*.ts", "apps/dk/src/**/*.html"]
+            "lintFilePatterns": [
+              "apps/dk/src/**/*.ts",
+              "apps/dk/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/dk"],
+          "outputs": [
+            "coverage/apps/dk"
+          ],
           "options": {
             "jestConfig": "apps/dk/jest.config.js",
             "passWithNoTests": true
@@ -107,14 +121,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/dk-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/dk-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["dk"]
+      "implicitDependencies": [
+        "dk"
+      ]
     },
     "ui": {
       "projectType": "library",
@@ -124,7 +144,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -133,11 +155,47 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/src/**/*.ts", "libs/ui/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts",
+              "libs/ui/src/**/*.html"
+            ]
           }
         }
       },
       "tags": []
     }
+  },
+  "npmScope": "dk",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "MTBlYzljNjItM2VmMS00YjBjLTg2Y2EtODQ1ODIwYTBkOTNlfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }
